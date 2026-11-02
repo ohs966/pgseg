@@ -8,7 +8,7 @@
     const body = (p.body[S.lang] || p.body.en).map(([h, t]) => (h ? `<h2>${S.esc(h)}</h2>` : "") + `<p>${S.esc(t)}</p>`).join("");
     const more = (window.POSTS || []).filter((x) => x.slug !== slug).slice(0, 2).map((x) => S.postCard(x)).join("");
     document.getElementById("main").innerHTML = `${S.crumbs([{ label: ar ? "المدونة" : "Blog", href: "blog.html" }, { label: tx(p.title) }])}<article class="article" id="article"><h1>${S.esc(tx(p.title))}</h1><time datetime="${p.date}">${d}</time><div class="hero-img"><img src="${p.img}" alt="" /></div>${body}
-      <div class="pg-cta"><h2>${ar ? "تحتاج هذه المنتجات؟ اطلب عرض سعر" : "Need these products? Get a quotation"}</h2><div><a class="btn dark" href="quote.html" data-t="request_quote"></a></div></div></article>${more ? `<section class="article"><h2>${ar ? "اقرأ أيضا" : "Read next"}</h2><div class="bgrid">${more}</div></section>` : ""}`;
+      <div class="pg-cta"><h2>${ar ? "تحتاج هذه المنتجات؟ اطلب عرض سعر" : "Need these products? Get a quotation"}</h2><div>${p.dep ? `<a class="btn" href="catalog.html?d=${p.dep}">${ar ? "تصفح المنتجات" : "Browse the products"}</a> ` : ""}<a class="btn dark" href="quote.html" data-t="request_quote"></a></div></div></article>${more ? `<section class="article"><h2>${ar ? "اقرأ أيضا" : "Read next"}</h2><div class="bgrid">${more}</div></section>` : ""}`;
     S.apply();
   }
   document.addEventListener("DOMContentLoaded", render); document.addEventListener("langchange", render);
