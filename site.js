@@ -4,6 +4,7 @@ window.PALM = {
   supabaseUrl: "https://gsgniarlokepcsagvvmq.supabase.co",
   supabaseAnonKey: "sb_publishable_bI8glK6s6T_UX5IWrvhJHQ_ThWSOp1j",
   phone: "+20 111 373 6556",
+  phone2: "+20 101 394 8606",
   email: "Sales@pgseg.com",
   linkedin: "", instagram: "", facebook: "", // paste profile links here and the icons appear in the footer
   partners: ["img/partners/1.png", "img/partners/2.png", "img/partners/3.png"],
@@ -97,8 +98,8 @@ const Site = {
   },
   departments() { return this.cached("deps", "public_departments?select=*&order=sort_order"); },
   async catalogue() { const deps = await this.departments(); const codes = new Set(deps.map((d) => d.code)); const rows = (await this.cached("cat", "public_catalogue?select=*&order=sector_sort,category_sort,name_en")).filter((r) => codes.has(r.sector_code));
-    const ph = { dep: {}, cat: {} }; for (const r of rows) { const im = r.images && r.images[0]; if (!im) continue; if (!ph.cat[r.category_id]) ph.cat[r.category_id] = im; if (!ph.dep[r.sector_code]) ph.dep[r.sector_code] = im; }
-    for (const d of deps) if (!ph.dep[d.code] && d.image_url) ph.dep[d.code] = d.image_url; this._ph = ph; return rows; },
+    const ph = { dep: {}, cat: {} }; for (const d of deps) if (d.image_url) ph.dep[d.code] = d.image_url; for (const r of rows) { const im = r.images && r.images[0]; if (!im) continue; if (!ph.cat[r.category_id]) ph.cat[r.category_id] = im; if (!ph.dep[r.sector_code]) ph.dep[r.sector_code] = im; }
+    this._ph = ph; return rows; },
   /** photo for a product: its own, else its category's, else its department's */
   photo(p) { const ph = this._ph || { dep: {}, cat: {} }; return (p.images && p.images[0]) || ph.cat[p.category_id] || ph.dep[p.sector_code] || ""; },
   thumb(u, w) { w = w || 400; return /images\.unsplash\.com/.test(u) ? u.replace(/([?&])w=\d+/, "$1w=" + w) : u; },
@@ -185,7 +186,7 @@ const Site = {
       <div class="fbrand"><img src="img/pgs-logo-white.png" alt="PGS" width="44" height="44" /><span>${ar ? "بالم للتوريدات العامة" : "PALM GENERAL SUPPLY"}</span><p data-t="f_tag"></p>
         <form class="news" id="newsform"><label for="newsemail">${ar ? "اشترك في النشرة لتصلك العروض والمقالات الجديدة" : "Get new offers and articles by email"}</label><div class="news-row"><input id="newsemail" name="email" type="email" required dir="ltr" placeholder="name@company.com" /><button class="btn light sm" type="submit">${ar ? "اشترك" : "Sign up"}</button></div><p class="news-msg" id="newsmsg" role="status"></p></form>
         <div class="social">${soc}</div>
-        <p class="fcontact"><a href="tel:${PALM.phone.replace(/\s/g, "")}" dir="ltr">${PALM.phone}</a> · <a href="mailto:${PALM.email}">${PALM.email}</a></p></div>
+        <p class="fcontact"><a href="tel:${PALM.phone.replace(/\s/g, "")}" dir="ltr">${PALM.phone}</a> · <a href="tel:${PALM.phone2.replace(/\s/g, "")}" dir="ltr">${PALM.phone2}</a> · <a href="mailto:${PALM.email}">${PALM.email}</a></p><p class="fcontact"><a class="frfx" href="rfq.html">${ar ? "أرسل طلب عرض سعر أو مقترح أو معلومات (RFQ / RFP / RFI)" : "Send an RFQ, RFP or RFI"} ›</a></p></div>
       <div><h3 data-t="f_pages"></h3><div id="footdeps"></div><a href="catalog.html">${ar ? "كل المنتجات" : "All products"} ›</a></div>
       ${cols}
     </div><div class="wrap foot-bot"><span>© ${new Date().getFullYear()} Palm General Supply</span><span>${(window.NAV_PAGES || []).slice(0, 2).map(([k, l]) => `<a href="${k}.html">${this.esc(this.tx(l))}</a>`).join(" · ")}</span></div></footer>`;

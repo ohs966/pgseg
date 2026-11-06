@@ -86,6 +86,11 @@ const PAGES = {
     ],
     cta: L("Still have a question? Contact us", "لديك سؤال آخر؟ تواصل معنا"),
   },
+  rfq: {
+    title: L("Send an RFQ, RFP or RFI", "أرسل طلب عرض سعر أو مقترح أو معلومات"),
+    lead: L("Companies, government entities and contractors can send us a formal request. Request for Quotation (RFQ) for prices on a defined list, Request for Proposal (RFP) for a full supply or service solution, Request for Information (RFI) to qualify us as a supplier. We acknowledge every request within one working day.", "الشركات والجهات الحكومية والمقاولون يمكنهم إرسال طلب رسمي. طلب عرض سعر (RFQ) لتسعير قائمة محددة، وطلب مقترح (RFP) لحل توريد أو خدمة متكامل، وطلب معلومات (RFI) لتأهيلنا كمورد. نؤكد استلام كل طلب خلال يوم عمل واحد."),
+    rfx: true,
+  },
   contact: {
     title: L("Contact us", "تواصل معنا"),
     lead: L("Call, WhatsApp, email or send the form. We answer every message on the same working day.", "اتصل أو راسلنا بالواتساب أو البريد أو أرسل النموذج. نرد على كل رسالة في نفس يوم العمل."),
@@ -177,7 +182,7 @@ Object.assign(PAGES, {
 const NAV_SERVICES = [["service-model", L("Account service", "خدمة الحسابات")], ["inventory", L("Inventory management", "إدارة المخزون")], ["contracts", L("Corporate contracts", "التعاقدات المؤسسية")], ["lean", L("Kitting & 5S", "التجهيز و5S")], ["safety", L("Safety programmes", "برامج السلامة")], ["manufacturing", L("Custom manufacturing", "التصنيع حسب الطلب")], ["sourcing", L("Technical sourcing", "التوريد الفني")], ["logistics", L("Delivery", "التوصيل")]];
 const FOOT = [
   [L("Company", "الشركة"), [["about", L("About us", "من نحن")], ["careers", L("Careers", "الوظائف")], ["suppliers", L("Become a supplier", "كن موردا")], ["blog", L("Blog", "المدونة")]]],
-  [L("Connect", "تواصل"), [["contact", L("Contact us", "تواصل معنا")], ["coverage", L("Delivery areas", "مناطق التوصيل")], ["orders", L("Track an order", "تتبع طلب")], ["import-export", L("International orders", "الطلبات الدولية")]]],
+  [L("Connect", "تواصل"), [["contact", L("Contact us", "تواصل معنا")], ["rfq", L("Send an RFQ / RFP / RFI", "أرسل RFQ / RFP / RFI")], ["coverage", L("Delivery areas", "مناطق التوصيل")], ["orders", L("Track an order", "تتبع طلب")], ["import-export", L("International orders", "الطلبات الدولية")]]],
   [L("Governance", "الحوكمة"), [["terms", L("Terms of sale", "شروط البيع")], ["privacy", L("Privacy", "الخصوصية")], ["accessibility", L("Accessibility", "سهولة الاستخدام")]]],
   [L("Resources", "الموارد"), [["guides", L("Buying guides", "أدلة الشراء")], ["documents", L("Safety data sheets", "نشرات السلامة")], ["help", L("Help & FAQ", "المساعدة")], ["offers", L("Offers", "العروض")]]],
 ];
