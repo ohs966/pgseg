@@ -6,7 +6,7 @@ window.PALM = {
   phone: "+20 111 373 6556",
   phone2: "+20 101 394 8606",
   email: "Sales@pgseg.com",
-  linkedin: "https://www.linkedin.com/company/pgseg", instagram: "", facebook: "https://www.facebook.com/profile.php?id=61596093459469", // paste profile links here and the icons appear in the footer
+  linkedin: "https://www.linkedin.com/company/pgseg", instagram: "", facebook: "https://www.facebook.com/palmgeneralsupply.egypt", // paste profile links here and the icons appear in the footer
   partners: ["img/partners/1.png", "img/partners/2.png", "img/partners/3.png"],
 };
 
@@ -67,7 +67,7 @@ const Site = {
     return l;
   })(),
   /** pages that have an Arabic twin at <name>-ar.html */
-  AR: ["index", "catalog", "offers", "services", "industries", "guides", "import-export", "about", "help", "rfq", "contact", "terms", "privacy", "coverage", "suppliers", "documents", "careers", "accessibility", "blog", "quote"],
+  AR: ["index", "catalog", "offers", "services", "industries", "guides", "import-export", "about", "help", "rfq", "contact", "terms", "privacy", "coverage", "suppliers", "documents", "careers", "accessibility", "blog", "quote", "products"],
   /** turn an internal link into the current language version */
   L(href) {
     if (!href || /^(https?:|mailto:|tel:|#|javascript:)/i.test(href)) return href;
@@ -212,7 +212,7 @@ const Site = {
       <div class="fbrand"><img src="img/pgs-logo-white.png" alt="PGS" width="44" height="44" /><span>${ar ? "بالم للتوريدات العامة" : "PALM GENERAL SUPPLY"}</span><p data-t="f_tag"></p>
         <form class="news" id="newsform"><label for="newsemail">${ar ? "اشترك في النشرة لتصلك العروض والمقالات الجديدة" : "Get new offers and articles by email"}</label><div class="news-row"><input id="newsemail" name="email" type="email" required dir="ltr" placeholder="name@company.com" /><button class="btn light sm" type="submit">${ar ? "اشترك" : "Sign up"}</button></div><p class="news-msg" id="newsmsg" role="status"></p></form>
         <div class="social">${soc}</div>
-        <p class="fcontact"><a href="tel:${PALM.phone.replace(/\s/g, "")}" dir="ltr">${PALM.phone}</a> · <a href="tel:${PALM.phone2.replace(/\s/g, "")}" dir="ltr">${PALM.phone2}</a> · <a href="mailto:${PALM.email}">${PALM.email}</a></p><p class="fcontact"><a class="frfx" href="rfq.html">${ar ? "أرسل طلب عرض سعر أو مقترح أو معلومات (RFQ / RFP / RFI)" : "Send an RFQ, RFP or RFI"} ›</a></p></div>
+        <p class="fcontact"><a href="tel:${PALM.phone.replace(/\s/g, "")}" dir="ltr">${PALM.phone}</a> · <a href="tel:${PALM.phone2.replace(/\s/g, "")}" dir="ltr">${PALM.phone2}</a> · <a href="mailto:${PALM.email}">${PALM.email}</a></p><p class="fcontact"><a class="frfx" href="rfq.html">${ar ? "أرسل طلب عرض سعر أو مقترح أو معلومات (RFQ / RFP / RFI)" : "Send an RFQ, RFP or RFI"} ›</a> · <a class="frfx" href="products.html">${ar ? "دليل كل المنتجات" : "All products A to Z"} ›</a></p></div>
       <div><h3 data-t="f_pages"></h3><div id="footdeps"></div><a href="catalog.html">${ar ? "كل المنتجات" : "All products"} ›</a></div>
       ${cols}
     </div><div class="wrap foot-bot"><span>© ${new Date().getFullYear()} Palm General Supply</span><span>${(window.NAV_PAGES || []).slice(0, 2).map(([k, l]) => `<a href="${k}.html">${this.esc(this.tx(l))}</a>`).join(" · ")}</span></div></footer>`;
@@ -247,6 +247,8 @@ window.Site = Site;
 ICONS.search = '<circle cx="21" cy="21" r="13"/><path d="M31 31l11 11"/>';
 
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-pre]").forEach((n) => n.remove());
+  const mm = document.getElementById("main"); if (mm) for (const n of mm.childNodes) if (n.nodeType === 8 && n.data.startsWith("pmorig:")) { mm.innerHTML = n.data.slice(7, -7).replace(/&#45;&#45;/g, "--"); break; }
   Site.fixLinks(); try { new MutationObserver((ms) => { for (const m of ms) m.addedNodes.forEach((n) => { if (n.nodeType === 1) { if (n.matches && n.matches("a[href],form[action]")) Site.fixLinks(n.parentNode || document); else Site.fixLinks(n); } }); }).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
   document.body.insertAdjacentHTML("afterbegin", Site.header());
   document.body.insertAdjacentHTML("beforeend", Site.footer());
