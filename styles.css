@@ -246,7 +246,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .mega-in { grid-template-columns: 1fr; } .mega-cats { display: none; } .mega-deps { border: 0; }
 }
 @media (max-width: 600px) {
-  .logo span b { display: none; }
+  .logo span { font-size: 12px; letter-spacing: .1em; gap: 2px; }
+  .logo span b { font-size: 7.5px; letter-spacing: .16em; white-space: nowrap; }
+  html[lang="ar"] .logo span { font-size: 13px; }
+  html[lang="ar"] .logo span b { font-size: 10px; letter-spacing: 0; }
   .allbtn span:not(.burger) { display: none; } .allbtn { padding: 9px 11px; }
   .qlink .lbl { display: none; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -599,3 +602,4 @@ a.guide-link { color: inherit; text-decoration: none; }
 .ct-rfx b { color: #0A6FCC; }
 .foot .frfx { display: inline-block; margin-top: 8px; font-weight: 700; }
 @media (max-width: 700px) { .rfx-types, .rfx-grid { grid-template-columns: 1fr; } }
+.crow { color: inherit; }
