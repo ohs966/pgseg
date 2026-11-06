@@ -7,11 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=30" />
-<script src="icons.js?v=30"></script>
-<script src="pages.js?v=30"></script>
-<script src="posts.js?v=30"></script>
-<script src="site.js?v=30"></script>
+<link rel="stylesheet" href="styles.css?v=31" />
+<script src="icons.js?v=31"></script>
+<script src="pages.js?v=31"></script>
+<script src="posts.js?v=31"></script>
+<script src="site.js?v=31"></script>
+
 
 
 <link rel="icon" type="image/png" sizes="64x64" href="img/favicon-pgs.png" />
@@ -65,7 +66,7 @@ window.PAGE = async function () {
   let deps = []; try { deps = await Site.departments(); await Site.catalogue(); } catch (e) {}
   const draw = () => {
     const total = deps.reduce((n, d) => n + Number(d.product_count || 0), 0);
-    document.getElementById("kpis").innerHTML = '<div><dt>' + Site.t("hero_k1") + '</dt><dd>' + Site.num(total) + '+</dd></div><div><dt>' + Site.t("hero_k2") + '</dt><dd>' + Site.num(deps.length) + '</dd></div><div><dt>' + Site.t("hero_k3") + '</dt><dd>' + Site.t("hero_k3v") + '</dd></div>';
+    document.getElementById("kpis").innerHTML = '<div><dt>' + Site.t("hero_k1") + '</dt><dd>' + Site.num(total) + '+</dd></div><div><dt>' + Site.t("hero_k2") + '</dt><dd>' + Site.num(deps.length) + '</dd></div>';
     document.getElementById("tiles").innerHTML = deps.map((d) => '<a class="tile photo" href="catalog.html?d=' + d.code + '"><span class="tile-img">' + (Site.depPhoto(d.code) ? '<img src="' + Site.esc(Site.thumb(Site.depPhoto(d.code), 500)) + '" alt="" loading="lazy" />' : icon(d.icon || "box", 64)) + '</span><span class="tile-name">' + Site.esc(Site.pick(d, "name")) + '</span><span class="tile-n">' + (d.product_count ? Site.num(d.product_count) + " " + Site.t("products") : Site.t("on_request")) + '</span></a>').join("");
   };
   draw(); document.addEventListener("langchange", draw);
