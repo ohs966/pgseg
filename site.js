@@ -55,16 +55,18 @@ const DICT = {
 };
 
 const Site = {
-  lang: (function () { try { return localStorage.getItem("pt_lang") || "en"; } catch (e) { return "en"; } })(),
+  lang: (function () { const f = document.documentElement.getAttribute("data-force-lang"); if (f) { try { localStorage.setItem("pt_lang", f); } catch (e) {} return f; } try { return localStorage.getItem("pt_lang") || "en"; } catch (e) { return "en"; } })(),
+  brandHtml() { return this.lang === "ar" ? "بالم<b>للتوريدات العامة</b>" : "PALM<b>GENERAL SUPPLY</b>"; },
   t(k) { return (DICT[this.lang] && DICT[this.lang][k]) || DICT.en[k] || k; },
   pick(row, base) { if (!row) return ""; return (this.lang === "ar" ? row[base + "_ar"] : row[base + "_en"]) || row[base + "_en"] || row[base + "_ar"] || ""; },
   esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); },
   q(k) { return new URLSearchParams(location.search).get(k); },
-  setLang(l) { this.lang = l; try { localStorage.setItem("pt_lang", l); } catch (e) {} this.apply(); document.dispatchEvent(new Event("langchange")); },
+  setLang(l) { try { localStorage.setItem("pt_lang", l); } catch (e) {} const alt = document.documentElement.getAttribute("data-alt-" + l); if (alt) { location.href = alt; return; } this.lang = l; this.apply(); document.dispatchEvent(new Event("langchange")); },
   apply() {
     document.documentElement.lang = this.lang; document.documentElement.dir = this.lang === "ar" ? "rtl" : "ltr";
     document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = this.t(el.dataset.t); });
     document.querySelectorAll("[data-t-ph]").forEach((el) => { el.placeholder = this.t(el.dataset.tPh); });
+    const bt = document.getElementById("brandtxt"); if (bt) bt.innerHTML = this.brandHtml();
     this.renderHeaderDynamic();
   },
   unit(u) { const ar = { box: "علبة", piece: "قطعة", pair: "زوج", set: "طقم", pack: "عبوة", roll: "رول", can: "جركن", carton: "كرتونة", bundle: "ربطة", metre: "متر" }; return this.lang === "ar" ? (ar[u] || u || "") : (u || ""); },
@@ -145,7 +147,7 @@ const Site = {
   header() {
     return `<a class="skip" href="#main">Skip to content</a>
     <header class="top" id="top"><div class="top-in">
-      <a class="logo" href="index.html" aria-label="Palm General Supply"><img src="img/emblem.png" alt="" /><span>PALM<b>GENERAL SUPPLY</b></span></a>
+      <a class="logo" href="index.html" aria-label="Palm General Supply"><img src="img/pgs-logo-white.png" alt="PGS" width="40" height="40" /><span id="brandtxt">${this.brandHtml()}</span></a>
       <button class="allbtn" id="allbtn" aria-expanded="false" aria-controls="mega"><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span><span data-t="all_products"></span></button>
       <form class="search" id="searchform" role="search" action="catalog.html"><input id="q" name="q" type="search" data-t-ph="search_ph" autocomplete="off" aria-label="Search" /><button type="submit" aria-label="Search">${icon("search", 20)}</button></form>
       <nav class="tools">
@@ -170,7 +172,7 @@ const Site = {
   },
   postCard(p) {
     const d = new Date(p.date + "T00:00:00").toLocaleDateString(this.lang === "ar" ? "ar-EG" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
-    return `<article class="bcard"><a class="bcard-img" href="blog-${p.slug}.html" tabindex="-1" aria-hidden="true"><img src="${p.img}" alt="" loading="lazy" /></a><div class="bcard-body"><time datetime="${p.date}">${d}</time><h3><a href="blog-${p.slug}.html">${this.esc(this.tx(p.title))}</a></h3><p>${this.esc(this.tx(p.excerpt))}</p></div></article>`;
+    return `<article class="bcard"><a class="bcard-img" href="blog-${p.slug}${this.lang === "ar" ? "-ar" : ""}.html" tabindex="-1" aria-hidden="true"><img src="${p.img}" alt="" loading="lazy" /></a><div class="bcard-body"><time datetime="${p.date}">${d}</time><h3><a href="blog-${p.slug}${this.lang === "ar" ? "-ar" : ""}.html">${this.esc(this.tx(p.title))}</a></h3><p>${this.esc(this.tx(p.excerpt))}</p></div></article>`;
   },
   crumbs(items) { return `<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">${this.t("home")}</a>${items.map((x) => `<span aria-hidden="true">›</span>${x.href ? `<a href="${x.href}">${this.esc(x.label)}</a>` : `<span>${this.esc(x.label)}</span>`}`).join("")}</nav>`; },
   footer() {
@@ -180,7 +182,7 @@ const Site = {
     const soc = [["LinkedIn", PALM.linkedin, '<path d="M6 9h4v12H6zM8 3a2 2 0 110 4 2 2 0 010-4zM13 9h4v2c1-1.5 2.5-2.3 4.5-2.3 3 0 4.5 2 4.5 5.8V21h-4v-6c0-1.8-.6-3-2.2-3-1.5 0-2.8 1-2.8 3v6h-4z" transform="scale(.9)"/>'], ["Instagram", PALM.instagram, '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/>'], ["Facebook", PALM.facebook, '<path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.3V11H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/>'], ["WhatsApp", "https://wa.me/" + wa, '<path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3zm4.7 12.6c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.1 0 .4 0 .6.4l.8 1.9c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/>']].filter((x) => x[1]).map(([n, u, d]) => `<a href="${u}" aria-label="${n}" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${d}</svg></a>`).join("");
     return `${this.blogStrip()}<section class="help"><div class="wrap help-in"><div><h2 data-t="cant_find"></h2><p data-t="cant_find_p"></p></div><div class="help-act"><a class="btn dark" href="quote.html#other" data-t="tell_us"></a><a class="btn wa" href="https://wa.me/${wa}">WhatsApp</a></div></div></section>
     <footer class="foot"><div class="wrap foot-in">
-      <div class="fbrand"><img src="img/emblem.png" alt="" /><span>PALM GENERAL SUPPLY</span><p data-t="f_tag"></p>
+      <div class="fbrand"><img src="img/pgs-logo-white.png" alt="PGS" width="44" height="44" /><span>${ar ? "بالم للتوريدات العامة" : "PALM GENERAL SUPPLY"}</span><p data-t="f_tag"></p>
         <form class="news" id="newsform"><label for="newsemail">${ar ? "اشترك في النشرة لتصلك العروض والمقالات الجديدة" : "Get new offers and articles by email"}</label><div class="news-row"><input id="newsemail" name="email" type="email" required dir="ltr" placeholder="name@company.com" /><button class="btn light sm" type="submit">${ar ? "اشترك" : "Sign up"}</button></div><p class="news-msg" id="newsmsg" role="status"></p></form>
         <div class="social">${soc}</div>
         <p class="fcontact"><a href="tel:${PALM.phone.replace(/\s/g, "")}" dir="ltr">${PALM.phone}</a> · <a href="mailto:${PALM.email}">${PALM.email}</a></p></div>
