@@ -36,7 +36,7 @@
   function render() {
     wa = _wa().replace(/[^\d]/g, "");
     P = window.PAGES[document.body.dataset.page]; if (!P) return;
-    const el = document.getElementById("page"); document.title = tx(P.title) + " | Palm General Supply";
+    const el = document.getElementById("page"); document.title = tx(P.title) + (S.lang === "ar" ? " | بالم للتوريدات العامة" : " | Palm General Supply");
     let h = `<div class="wrap">${S.crumbs([{ label: tx(P.title) }])}</div><section class="pg-hero"><div class="wrap"><h1>${S.esc(tx(P.title))}</h1><p>${S.esc(tx(P.lead))}</p></div></section><div class="wrap pg-body">`;
     if (P.sections) {
       const imgd = P.sections.some((x) => x.img);

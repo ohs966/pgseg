@@ -56,13 +56,39 @@ const DICT = {
 };
 
 const Site = {
-  lang: (function () { const f = document.documentElement.getAttribute("data-force-lang"); if (f) { try { localStorage.setItem("pt_lang", f); } catch (e) {} return f; } try { return localStorage.getItem("pt_lang") || "en"; } catch (e) { return "en"; } })(),
+  lang: (function () {
+    const h = document.documentElement; const f = h.getAttribute("data-force-lang");
+    let qp = null; try { qp = new URLSearchParams(location.search).get("lang"); } catch (e) {}
+    let stored = null; try { stored = localStorage.getItem("pt_lang"); } catch (e) {}
+    // an Arabic reader who lands on an English URL goes to its Arabic twin
+    if (f === "en" && !qp && stored === "ar" && h.getAttribute("data-alt-ar") && !/bot|crawl|spider|lighthouse/i.test(navigator.userAgent)) { location.replace(h.getAttribute("data-alt-ar") + location.search + location.hash); }
+    const l = f || (qp === "ar" || qp === "en" ? qp : null) || stored || "en";
+    try { localStorage.setItem("pt_lang", l); } catch (e) {}
+    return l;
+  })(),
+  /** pages that have an Arabic twin at <name>-ar.html */
+  AR: ["index", "catalog", "offers", "services", "industries", "guides", "import-export", "about", "help", "rfq", "contact", "terms", "privacy", "coverage", "suppliers", "documents", "careers", "accessibility", "blog", "quote"],
+  /** turn an internal link into the current language version */
+  L(href) {
+    if (!href || /^(https?:|mailto:|tel:|#|javascript:)/i.test(href)) return href;
+    const m = href.match(/^([a-z0-9-]+)\.html(.*)$/i); if (!m) return href;
+    let [, name, rest] = m; const isAr = /-ar$/.test(name) && this.AR.includes(name.slice(0, -3)); const base = isAr ? name.slice(0, -3) : name;
+    if (this.lang === "ar") {
+      if (this.AR.includes(base)) return base + "-ar.html" + rest;
+      if (base === "product" && !/[?&]lang=/.test(rest)) return "product.html" + (rest.startsWith("?") ? rest + "&lang=ar" : "?lang=ar" + rest);
+      return href;
+    }
+    if (isAr) return base + ".html" + rest;
+    if (base === "product") return "product.html" + rest.replace(/([?&])lang=ar&?/, "$1").replace(/[?&]$/, "");
+    return href;
+  },
+  fixLinks(root) { (root || document).querySelectorAll("a[href]").forEach((a) => { const h = a.getAttribute("href"); const n = this.L(h); if (n !== h) a.setAttribute("href", n); }); (root || document).querySelectorAll("form[action]").forEach((f) => { const h = f.getAttribute("action"); const n = this.L(h); if (n !== h) f.setAttribute("action", n); }); },
   brandHtml() { return this.lang === "ar" ? "بالم<b>للتوريدات العامة</b>" : "PALM<b>GENERAL SUPPLY</b>"; },
   t(k) { return (DICT[this.lang] && DICT[this.lang][k]) || DICT.en[k] || k; },
   pick(row, base) { if (!row) return ""; return (this.lang === "ar" ? row[base + "_ar"] : row[base + "_en"]) || row[base + "_en"] || row[base + "_ar"] || ""; },
   esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); },
   q(k) { return new URLSearchParams(location.search).get(k); },
-  setLang(l) { try { localStorage.setItem("pt_lang", l); } catch (e) {} const alt = document.documentElement.getAttribute("data-alt-" + l); if (alt) { location.href = alt; return; } this.lang = l; this.apply(); document.dispatchEvent(new Event("langchange")); },
+  setLang(l) { try { localStorage.setItem("pt_lang", l); } catch (e) {} const alt = document.documentElement.getAttribute("data-alt-" + l); if (alt) { location.href = alt + (/blog-/.test(alt) ? "" : location.search + location.hash); return; } if (/[?&]lang=/.test(location.search) || /product\.html$/.test(location.pathname)) { const u = new URL(location.href); u.searchParams.set("lang", l); location.href = u.toString(); return; } this.lang = l; this.apply(); document.dispatchEvent(new Event("langchange")); },
   apply() {
     document.documentElement.lang = this.lang; document.documentElement.dir = this.lang === "ar" ? "rtl" : "ltr";
     document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = this.t(el.dataset.t); });
@@ -221,6 +247,7 @@ window.Site = Site;
 ICONS.search = '<circle cx="21" cy="21" r="13"/><path d="M31 31l11 11"/>';
 
 document.addEventListener("DOMContentLoaded", () => {
+  Site.fixLinks(); try { new MutationObserver((ms) => { for (const m of ms) m.addedNodes.forEach((n) => { if (n.nodeType === 1) { if (n.matches && n.matches("a[href],form[action]")) Site.fixLinks(n.parentNode || document); else Site.fixLinks(n); } }); }).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
   document.body.insertAdjacentHTML("afterbegin", Site.header());
   document.body.insertAdjacentHTML("beforeend", Site.footer());
   const qv = Site.q("q"); if (qv) document.getElementById("q").value = qv;
