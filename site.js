@@ -6,7 +6,7 @@ window.PALM = {
   phone: "+20 111 373 6556",
   phone2: "+20 101 394 8606",
   email: "Sales@pgseg.com",
-  linkedin: "https://www.linkedin.com/company/pgseg", instagram: "", facebook: "https://www.facebook.com/palmgeneralsupply.egypt", // paste profile links here and the icons appear in the footer
+  linkedin: "https://www.linkedin.com/company/pgseg", instagram: "https://www.instagram.com/pgs.egypt/", facebook: "https://www.facebook.com/palmgeneralsupply.egypt", // paste profile links here and the icons appear in the footer
   partners: ["img/partners/1.png", "img/partners/2.png", "img/partners/3.png"],
 };
 

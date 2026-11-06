@@ -57,6 +57,7 @@
         <a class="ct-card" href="https://wa.me/${wa}">${icon("chat", 28)}<span>WhatsApp</span><b dir="ltr">${PALM.phone}</b></a>
         <a class="ct-card" href="mailto:${PALM.email}">${icon("paper", 28)}<span>${S.t("c_mail")}</span><b>${PALM.email}</b></a>
         <div class="ct-card">${icon("truck", 28)}<span>${S.lang === "ar" ? "مواعيد العمل" : "Working hours"}</span><b>${S.lang === "ar" ? "الأحد إلى الخميس، 9 ص إلى 6 م" : "Sunday to Thursday, 9 am to 6 pm"}</b></div>
+        <div class="ct-card ct-social">${icon("chat", 28)}<span>${S.lang === "ar" ? "تابعنا" : "Follow us"}</span><b><a href="${PALM.linkedin}" target="_blank" rel="noopener">LinkedIn</a> · <a href="${PALM.facebook}" target="_blank" rel="noopener">Facebook</a> · <a href="${PALM.instagram}" target="_blank" rel="noopener">Instagram</a></b></div>
         <a class="ct-card ct-rfx" href="rfq.html">${icon("quote", 28)}<span>${S.lang === "ar" ? "للشركات والجهات" : "For companies and entities"}</span><b>${S.lang === "ar" ? "أرسل RFQ أو RFP أو RFI ›" : "Send an RFQ, RFP or RFI ›"}</b></a>
       </div><form id="cform" class="form ct-form"><h2>${S.lang === "ar" ? "أرسل رسالة" : "Send a message"}</h2>
         <label><span data-t="fm_company"></span><input name="company" autocomplete="organization" /></label>
