@@ -88,6 +88,8 @@ const Site = {
   pick(row, base) { if (!row) return ""; return (this.lang === "ar" ? row[base + "_ar"] : row[base + "_en"]) || row[base + "_en"] || row[base + "_ar"] || ""; },
   esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); },
   q(k) { return new URLSearchParams(location.search).get(k); },
+  /** static product page URL; must match tools/build-products.mjs */
+  purl(p, l) { const s = (String(p.name_en || "item").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/, "") || "item") + "-" + p.id.slice(0, 8); return "product-" + s + ((l || this.lang) === "ar" ? "-ar" : "") + ".html"; },
   setLang(l) { try { localStorage.setItem("pt_lang", l); } catch (e) {} const alt = document.documentElement.getAttribute("data-alt-" + l); if (alt) { location.href = alt + (/blog-/.test(alt) ? "" : location.search + location.hash); return; } if (/[?&]lang=/.test(location.search) || /product\.html$/.test(location.pathname)) { const u = new URL(location.href); u.searchParams.set("lang", l); location.href = u.toString(); return; } this.lang = l; this.apply(); document.dispatchEvent(new Event("langchange")); },
   apply() {
     document.documentElement.lang = this.lang; document.documentElement.dir = this.lang === "ar" ? "rtl" : "ltr";
@@ -235,8 +237,8 @@ const Site = {
     const name = this.pick(p, "name"); const img = this.photo(p);
     const nSpec = mode === "list" ? 4 : 2; const sl = (p.specs || []).slice(0, nSpec);
     const specs = sl.map((s) => `<li title="${this.esc(this.lang === "ar" ? s.v_ar : s.v_en)}"><span>${this.esc(this.lang === "ar" ? s.k_ar : s.k_en)}</span><b>${this.esc(this.lang === "ar" ? s.v_ar : s.v_en)}</b></li>`).join("") + "<li></li>".repeat(Math.max(0, nSpec - sl.length));
-    return `<article class="pc ${mode || ""}"><a class="pc-img" href="product.html?id=${p.id}" aria-hidden="true" tabindex="-1">${img ? `<img src="${this.esc(img)}" alt="" loading="lazy" />` : icon(p.category_icon || p.sector_icon || "box", 64)}</a>
-      <div class="pc-body"><div class="pc-cat">${this.esc(this.pick(p, "category"))}</div><h3 title="${this.esc(name)}"><a href="product.html?id=${p.id}">${this.esc(name)}</a></h3><ul class="pc-specs">${specs}</ul>
+    return `<article class="pc ${mode || ""}"><a class="pc-img" href="${this.purl(p)}" aria-hidden="true" tabindex="-1">${img ? `<img src="${this.esc(img)}" alt="" loading="lazy" />` : icon(p.category_icon || p.sector_icon || "box", 64)}</a>
+      <div class="pc-body"><div class="pc-cat">${this.esc(this.pick(p, "category"))}</div><h3 title="${this.esc(name)}"><a href="${this.purl(p)}">${this.esc(name)}</a></h3><ul class="pc-specs">${specs}</ul>
       <div class="pc-foot"><span class="pc-unit">${this.t("unit")}: ${this.esc(this.unit(p.unit))}</span><button class="btn sm" data-add="${p.id}">${icon("quote", 16)}<span>${this.t("add_quote")}</span></button></div></div></article>`;
   },
   bindAdd(root, rows) {
