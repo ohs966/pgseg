@@ -93,7 +93,7 @@ function page(p, l) {
   const related = rel.slice(i0, i0 + 12).concat(rel.slice(0, Math.max(0, 12 - (rel.length - i0)))).slice(0, 12);
   const optsTxt = attrs.length ? attrs.map((a) => (ar ? a.ar : a.en)).join(ar ? " و" : ", ") : "";
   const ld = [
-    { "@context": "https://schema.org", "@type": "Product", name: ar ? p.name_ar || p.name_en : p.name_en, alternateName: ar ? p.name_en : p.name_ar, description: meta, inLanguage: ar ? "ar-EG" : "en", sku, category: `${p.sector_en} > ${p.category_en}`, url, brand: { "@type": "Brand", name: p.brand || "Palm General Supply" }, ...(p.mpn ? { mpn: p.mpn } : {}), ...(img ? { image: img } : {}), ...(specRows.length ? { additionalProperty: specRows.map(([k, v]) => ({ "@type": "PropertyValue", name: k, value: v })) } : {}) },
+    { "@context": "https://schema.org", "@type": "ItemPage", name: ar ? p.name_ar || p.name_en : p.name_en, alternateName: ar ? p.name_en : p.name_ar, description: meta, inLanguage: ar ? "ar-EG" : "en", url, identifier: sku, about: { "@type": "Thing", name: `${p.sector_en} > ${p.category_en}` }, ...(img ? { primaryImageOfPage: { "@type": "ImageObject", url: img } } : {}), publisher: { "@id": "https://www.pgseg.com/#org" } },
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [[t.home, SITE + (ar ? "index-ar.html" : "")], [t.all, SITE + catHref], [depName, SITE + catHref + "?d=" + p.sector_code], [cat, SITE + catHref + "?d=" + p.sector_code + "&c=" + p.category_id], [name, url]].map(([n, u], i) => ({ "@type": "ListItem", position: i + 1, name: n, item: u })) },
   ];
   const about = ar
