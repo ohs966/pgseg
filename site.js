@@ -20,12 +20,12 @@ const DICT = {
     hero_t: "Everything your business runs on, supplied.", hero_p: "Fasteners, safety, cleaning, electrical, tools, uniforms and more. Build a list, send it, and get a full quotation within 24 hours.",
     hero_k1: "Products in stock range", hero_k2: "Departments", hero_k3: "Quotation turnaround", hero_k3v: "24 h",
     shop_by: "Shop by department", on_request: "On request", products: "products", items: "items", categories: "Categories",
-    how_t: "How ordering works", how1t: "Build your list", how1p: "Add products with the exact size, finish and quantity you need.", how2t: "Send one request", how2p: "Your whole list arrives with our team in one message.", how3t: "Get your quotation", how3p: "Priced, itemised and delivered to you within 24 hours.",
+    how_t: "How ordering works", how1t: "Build your list", how1p: "Add products with the exact size, finish and quantity you need. We supply in bulk, so each item has a minimum order.", how2t: "Send one request", how2p: "Your whole list arrives with our team in one message.", how3t: "Get your quotation", how3p: "Priced, itemised and delivered to you within 24 hours.",
     partners: "Clients and partners", cant_find: "Can't find it?", cant_find_p: "We source beyond this catalogue. Tell us what you need and we will quote it.", tell_us: "Tell us what you need",
     filters: "Filters", search_within: "Search within", clear: "Clear all", results: "results", sort: "Sort", sort_name: "Name A to Z", sort_options: "Most options",
-    grid: "Grid", list: "List", view: "View", add_quote: "Add to quote", added: "Added", details: "Details", options: "options", no_results: "No products match. Try fewer filters or a different word.",
+    grid: "Grid", list: "List", view: "View", add_quote: "Add to quote", moq_rule: "We supply in bulk only. Every item has a minimum order quantity (MOQ) shown on its page, and quantities below it are raised to the minimum.", moq_low: "Raised to the minimum order", added: "Added", details: "Details", options: "options", no_results: "No products match. Try fewer filters or a different word.",
     specs: "Specifications", choose: "Choose options", qty: "Quantity", unit: "Unit", add_to_list: "Add to quote list", request_now: "Request quotation now", whatsapp: "WhatsApp us",
-    related: "More in this category", price_note: "Prices depend on quantity, options and delivery. You will receive a full quotation within 24 hours.", sku: "Item", description: "Description",
+    related: "More in this category", price_note: "We supply in bulk only, so every item has a minimum order quantity. Prices depend on quantity, options and delivery. You will receive a full quotation within 24 hours.", sku: "Item", description: "Description",
     q_title: "Request a quotation", q_p: "Send your list, or upload your tender or RFQ document, and we will reply with a priced quotation within 24 hours.", q_empty: "Your quote list is empty.", q_browse: "Browse products",
     q_items: "Items in your list", remove: "Remove", fm_company: "Company", fm_name: "Your name", fm_phone: "Phone / WhatsApp", fm_email: "Email", fm_notes: "Anything else we should know (delivery city, deadline, branding)",
     fm_send: "Send request", fm_ok: "Thank you. Your request has reached our team and you will hear from us within 24 hours.", fm_bad: "Something went wrong. Please try again or call us.",
@@ -41,12 +41,12 @@ const DICT = {
     hero_t: "كل ما يحتاجه عملك، نوفره لك.", hero_p: "مسامير، سلامة، نظافة، كهرباء، عدد، زي موحد والمزيد. جهز قائمتك وأرسلها واستلم عرض سعر كامل خلال 24 ساعة.",
     hero_k1: "منتج في الكتالوج", hero_k2: "قسم", hero_k3: "وقت تجهيز العرض", hero_k3v: "٢٤ ساعة",
     shop_by: "تسوق حسب القسم", on_request: "حسب الطلب", products: "منتج", items: "صنف", categories: "الفئات",
-    how_t: "كيف تطلب", how1t: "جهز قائمتك", how1p: "أضف المنتجات بالمقاس والتشطيب والكمية المطلوبة بالضبط.", how2t: "أرسل طلبا واحدا", how2p: "تصل قائمتك كاملة لفريقنا في رسالة واحدة.", how3t: "استلم عرض السعر", how3p: "مسعر ومفصل لكل بند خلال 24 ساعة.",
+    how_t: "كيف تطلب", how1t: "جهز قائمتك", how1p: "أضف المنتجات بالمقاس والتشطيب والكمية المطلوبة بالضبط. بنورد بالجملة، فلكل صنف حد أدنى للطلب.", how2t: "أرسل طلبا واحدا", how2p: "تصل قائمتك كاملة لفريقنا في رسالة واحدة.", how3t: "استلم عرض السعر", how3p: "مسعر ومفصل لكل بند خلال 24 ساعة.",
     partners: "عملاؤنا وشركاؤنا", cant_find: "لم تجد ما تبحث عنه؟", cant_find_p: "نوفر ما هو أبعد من هذا الكتالوج. أخبرنا بما تحتاجه وسنسعره لك.", tell_us: "أخبرنا بما تحتاجه",
     filters: "التصفية", search_within: "ابحث في النتائج", clear: "مسح الكل", results: "نتيجة", sort: "الترتيب", sort_name: "الاسم أ إلى ي", sort_options: "الأكثر خيارات",
-    grid: "شبكة", list: "قائمة", view: "العرض", add_quote: "أضف للعرض", added: "تمت الإضافة", details: "التفاصيل", options: "خيارات", no_results: "لا توجد منتجات مطابقة. جرب تصفية أقل أو كلمة أخرى.",
+    grid: "شبكة", list: "قائمة", view: "العرض", add_quote: "أضف للعرض", moq_rule: "نورد بالجملة فقط. لكل صنف حد أدنى للطلب موضح في صفحته، وأي كمية أقل منه بتترفع للحد الأدنى تلقائيا.", moq_low: "اترفعت للحد الأدنى للطلب", added: "تمت الإضافة", details: "التفاصيل", options: "خيارات", no_results: "لا توجد منتجات مطابقة. جرب تصفية أقل أو كلمة أخرى.",
     specs: "المواصفات", choose: "اختر المواصفات", qty: "الكمية", unit: "الوحدة", add_to_list: "أضف لقائمة العرض", request_now: "اطلب عرض سعر الآن", whatsapp: "راسلنا واتساب",
-    related: "المزيد في هذه الفئة", price_note: "الأسعار تعتمد على الكمية والمواصفات والتوصيل. ستستلم عرض سعر كامل خلال 24 ساعة.", sku: "الصنف", description: "الوصف",
+    related: "المزيد في هذه الفئة", price_note: "نورد بالجملة فقط، فلكل صنف حد أدنى للطلب. الأسعار تعتمد على الكمية والمواصفات والتوصيل. ستستلم عرض سعر كامل خلال 24 ساعة.", sku: "الصنف", description: "الوصف",
     q_title: "اطلب عرض سعر", q_p: "أرسل قائمتك أو ارفع كراسة الشروط أو طلب التسعير، وسنرد بعرض سعر مفصل خلال 24 ساعة.", q_empty: "قائمة العرض فارغة.", q_browse: "تصفح المنتجات",
     q_items: "الأصناف في قائمتك", remove: "حذف", fm_company: "الشركة", fm_name: "الاسم", fm_phone: "الهاتف / واتساب", fm_email: "البريد الإلكتروني", fm_notes: "أي تفاصيل أخرى (مدينة التوصيل، الموعد، الشعار)",
     fm_send: "أرسل الطلب", fm_ok: "شكرا لك. وصل طلبك لفريقنا وسنتواصل معك خلال 24 ساعة.", fm_bad: "حدث خطأ. حاول مرة أخرى أو اتصل بنا.",
@@ -98,7 +98,38 @@ const Site = {
     const bt = document.getElementById("brandtxt"); if (bt) bt.innerHTML = this.brandHtml();
     this.renderHeaderDynamic();
   },
-  unit(u) { const ar = { box: "علبة", piece: "قطعة", pair: "زوج", set: "طقم", pack: "عبوة", roll: "رول", can: "جركن", carton: "كرتونة", bundle: "ربطة", metre: "متر" }; return this.lang === "ar" ? (ar[u] || u || "") : (u || ""); },
+  unit(u) { const ar = { box: "علبة", piece: "قطعة", pair: "زوج", set: "طقم", pack: "عبوة", roll: "رول", can: "جركن", carton: "كرتونة", bundle: "ربطة", metre: "متر", meter: "متر", m: "متر", kg: "كجم", sqm: "م²", m2: "م²", m3: "م³", ton: "طن", drum: "برميل", bag: "شيكارة", sheet: "لوح", coil: "لفة", spool: "بكرة", length: "عود", pallet: "بالتة", dozen: "دستة", kit: "طقم", pail: "جردل", cylinder: "أسطوانة", liter: "لتر", litre: "لتر", meal: "وجبة", trip: "نقلة", day: "يوم", service: "خدمة", visit: "زيارة", shipment: "شحنة", order: "طلب", person: "فرد", seat: "مقعد", bay: "وحدة", core: "شعرة" }; return this.lang === "ar" ? (ar[u] || u || "") : (u || ""); },
+  /** unit for a quantity: "100 pieces", "500 m", "50 boxes" */
+  unitN(u, n) { if (this.lang === "ar" || n === 1) return this.unit(u); u = u || "piece"; if (/^(m|m2|m3|sqm|kg|ton|metre|meter|liter|litre)$/.test(u)) return u === "metre" || u === "meter" ? "metres" : u === "liter" || u === "litre" ? "litres" : u === "ton" ? "tons" : u; return /(x|s|ch|sh)$/.test(u) ? u + "es" : u + "s"; },
+  /** label shown next to every product: minimum order quantity */
+  moqText(p) { const q = this.moq(p); return this.lang === "ar" ? "الحد الأدنى للطلب: " + this.num(q) + " " + this.unitN(p.unit, q) : "Minimum order: " + this.num(q) + " " + this.unitN(p.unit, q); },
+  moqShort(p) { const q = this.moq(p); return this.lang === "ar" ? "أقل طلب " + this.num(q) + " " + this.unitN(p.unit, q) : "Min. " + this.num(q) + " " + this.unitN(p.unit, q); },
+  /* MOQ_START: PGS supplies in bulk only. One rule for the whole site (also used by tools/build-products.mjs) */
+  moq: function(p) {
+    if (!p) return 1;
+    const u = String(p.unit || "piece").toLowerCase(), n = String(p.name_en || "").toLowerCase(), t = n + " " + String(p.category_en || "").toLowerCase(), s = p.sector_code || "";
+    const has = (re) => re.test(n), hasC = (re) => re.test(t);
+    if (/^(service|trip|shipment|day|visit|order|person|bay|seat)$/.test(u)) return 1;
+    if (u === "meal") return 200;
+    const UNIT = { ton: 5, m3: 10, kg: 500, liter: 1000, litre: 1000, drum: 10, pail: 20, can: 50, cylinder: 10, bag: 100, sheet: 50, sqm: 200, m2: 200, meter: 500, metre: 500, m: 500, roll: 50, coil: 10, spool: 20, length: 50, bundle: 20, pallet: 5, carton: 20, box: 50, pack: 50, dozen: 50, pair: 100, kit: 20, core: 24 };
+    if (u in UNIT) {
+      if (u === "bag" && hasC(/cement|sand|aggregate|gypsum|plaster|tile adhesive/)) return 200;
+      if (u === "sqm" || u === "m2") return hasC(/glass|glazing|curtain wall|partition|false ceiling/) ? 100 : 200;
+      if (/^(meter|metre|m)$/.test(u)) return hasC(/speed bump|kerb|curb|guardrail|barrier|fence|gutter|handrail/) ? 50 : hasC(/hose|belt|chain|rope|fiber|fibre/) ? 200 : 500;
+      if (u === "box" && hasC(/glove|mask|wipe|tissue|napkin|cable tie|screw|bolt|nut|washer|anchor|rivet|nail|pin|clip|electrode|insert/)) return 100;
+      return UNIT[u];
+    }
+    const tool = has(/\bbits?\b|blade|disc|wheel|insert|cutter|brush|squeegee|cloth|mop|kit\b|frame|seal|board|hose|filter|belt|valve|toner|cartridge|accessor/);
+    if (!tool && has(/generator|combi oven|convection oven|dishwasher|refrigerator|freezer|chiller|cold room|forklift|stacker|reach truck|scissor lift|air compressor|piston air|screw air|crane|transformer|switchgear|autoclave|boiler|\bups\b|gym machine|gate motor|barrier gate|elevator|storage tank|water tank|kiosk|shelter|booster pump|pump set|lathe|milling|drill press|welder|plasma cutter|concrete mixer|ultrasound|x-ray|defibrillator|projector|gas range|deep fryer|coffee machine|ice machine|washing machine|tumble dryer|ironer|carpet extractor|scrubber|sweeper|steriliz|incubator|centrifuge|fume hood|analytical balance|spectro|chromatograph|solar inverter|battery bank|dock leveller|checkout counter|dosing system|reverse osmosis|water softener|air handling|package unit|cooling tower|fire fighting pump|fire pump/)) return 2;
+    if (s === "machinery") return 2;
+    if (!has(/valve|scaffold|dispenser|maker|whiteboard|respirator|measuring|calculator|stapler|bathrobe|holder|stand\b|rack/) && has(/\bpens?\b|pencil|glove|\bmasks?\b|ear plug|earplug|bouffant|beard cover|shoe cover|\bcups?\b|straw|napkin|tissue|toothbrush|amenit|shampoo|\bsoap\b|slipper|cable tie|\bmarkers?\b|sticky note|envelope|folder|paper clip|\blabels?\b|\btags?\b|lanyard|badge|wristband|flyer|brochure|business card|bottled water|juice|snack|sachet|prep pad|swab|syringe|needle|bandage|gauze|spoon|fork|cutlery|plates\b|polybag|courier bag|garbage bag|bin liner|light bulb|led bulb|batteries|alkaline|fuse|t-shirt|tote|\bmugs?\b|notebook|duct tape|masking tape|packing tape|double sided tape|marking tape/)) return 500;
+    const SEC = { fasteners: 200, safety: 200, cleaning: 100, electrical: 100, lighting: 100, tools: 50, abrasives: 200, adhesives: 200, material_handling: 20, packaging: 500, plumbing: 100, lubricants: 50, office: 100, uniforms: 100, hospitality: 200, kitchen_equipment: 20, security: 20, construction: 50, welding: 50, cutting_tools: 50, hydraulics: 50, pneumatics: 50, pumps: 5, motors: 5, power_transmission: 50, electronics: 50, automotive: 50, hardware: 100, paint: 100, sealing: 200, test_measurement: 10, raw_materials: 50, outdoor: 20, oil_gas: 20, pharma: 100, education: 30, marine: 20, chemicals: 50, telecom: 50, furniture: 20, appliances: 10, camp: 10, promo: 500, retail: 10, glazing: 50, roads_municipal: 20, agriculture: 100, sports: 10, building_finishes: 100, housekeeping_buffet: 50, medical: 50, solar: 20 };
+    let q = SEC[s] || 50;
+    if (!tool && !has(/sheet|protector|jacket|tap\b|taps|toner|accessor|cover|pillow|towel|linen/) && has(/cordless|grinder|\bdrill\b|drill driver|impact|circular saw|jigsaw|breaker|vacuum|pressure washer|multimeter|clamp meter|tester|analyser|analyzer|camera|nvr|dvr|terminal|printer|scanner|laptop|computer|monitor|\btv\b|screen|router|access point|phone|radio|scale|balance|microwave|blender|\bmixer\b|oven|fryer|grill|kettle|toaster|dispenser|trolley|cart\b|ladder|scaffold|\bjacks?\b|hoist|winch|pallet truck|hand truck|\bsafe\b|\blockers?\b|cabinet|desk\b|table|chair|sofa|\bbeds?\b|mattress\b|wardrobe|whiteboard|motor|pump|actuator|\bfan\b|heater|air cooler|air conditioner|charger|inverter|controller|distribution board|panel|bollard|microscope|treadmill|dumbbell|kettlebell|weight plate|machine|shelving|racking|vibrator|compactor|meter\b|caliper|gauge/)) q = Math.min(q, s === "electrical" || s === "lighting" ? 20 : 10);
+    if (u === "set") q = q <= 10 ? Math.max(2, Math.round(q / 2)) : Math.round(q / 2);
+    return q;
+  },
+  /* MOQ_END */
   num(n) { return new Intl.NumberFormat(this.lang === "ar" ? "ar-EG" : "en-US").format(n); },
 
   /* ---------- data ---------- */
@@ -144,7 +175,8 @@ const Site = {
   saveList(l) { try { localStorage.setItem("pgs_quote", JSON.stringify(l)); } catch (e) {} this.renderHeaderDynamic(); document.dispatchEvent(new Event("listchange")); },
   addToList(item) {
     const l = this.list(); const key = item.id + "|" + (item.opts || []).join("|");
-    const ex = l.find((x) => x.key === key); if (ex) ex.qty = Number(ex.qty) + Number(item.qty || 1); else l.push(Object.assign({ key }, item));
+    const m = Math.max(1, Number(item.moq) || 1); item.moq = m; item.qty = Math.max(m, Number(item.qty) || m);
+    const ex = l.find((x) => x.key === key); if (ex) { ex.moq = m; ex.qty = Math.max(m, Number(ex.qty) + item.qty); } else l.push(Object.assign({ key }, item));
     this.saveList(l); this.toast(this.t("added") + ": " + (this.lang === "ar" ? item.name_ar : item.name_en));
   },
   toast(msg) { let el = document.getElementById("toast"); if (!el) { el = document.createElement("div"); el.id = "toast"; el.className = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); } el.textContent = msg; el.classList.add("on"); clearTimeout(this._tt); this._tt = setTimeout(() => el.classList.remove("on"), 2400); },
@@ -160,7 +192,8 @@ const Site = {
   async submitRequest(f, items, attachments) {
     attachments = attachments || [];
     const pid = crypto.randomUUID();
-    const lines = items.map((x, i) => (i + 1) + ". " + x.name_en + (x.opts_text_en ? " (" + x.opts_text_en + ")" : "") + " x " + x.qty + " " + (x.unit || "")).join("\n");
+    items = items.map((x) => Object.assign({}, x, { qty: Math.max(Number(x.moq) || 1, Number(x.qty) || 1) }));
+    const lines = items.map((x, i) => (i + 1) + ". " + x.name_en + (x.opts_text_en ? " (" + x.opts_text_en + ")" : "") + " x " + x.qty + " " + (x.unit || "") + (x.moq > 1 ? " [MOQ " + x.moq + "]" : "")).join("\n");
     const need = (lines ? lines + "\n\n" : "") + (f.notes || "");
     await this.rest("parties", { method: "POST", body: JSON.stringify({ id: pid, name_ar: f.company || f.name, name_en: f.company || f.name, status: "draft", sector: [], preferred_language: this.lang, notes: need }) });
     await this.rest("party_roles", { method: "POST", body: JSON.stringify({ party_id: pid, role: "client" }) });
@@ -239,10 +272,11 @@ const Site = {
     const specs = sl.map((s) => `<li title="${this.esc(this.lang === "ar" ? s.v_ar : s.v_en)}"><span>${this.esc(this.lang === "ar" ? s.k_ar : s.k_en)}</span><b>${this.esc(this.lang === "ar" ? s.v_ar : s.v_en)}</b></li>`).join("") + "<li></li>".repeat(Math.max(0, nSpec - sl.length));
     return `<article class="pc ${mode || ""}"><a class="pc-img" href="${this.purl(p)}" aria-hidden="true" tabindex="-1">${img ? `<img src="${this.esc(img)}" alt="" loading="lazy" />` : icon(p.category_icon || p.sector_icon || "box", 64)}</a>
       <div class="pc-body"><div class="pc-cat">${this.esc(this.pick(p, "category"))}</div><h3 title="${this.esc(name)}"><a href="${this.purl(p)}">${this.esc(name)}</a></h3><ul class="pc-specs">${specs}</ul>
+      <div class="pc-moq" title="${this.esc(this.moqText(p))}">${this.esc(this.moqShort(p))}</div>
       <div class="pc-foot"><span class="pc-unit">${this.t("unit")}: ${this.esc(this.unit(p.unit))}</span><button class="btn sm" data-add="${p.id}">${icon("quote", 16)}<span>${this.t("add_quote")}</span></button></div></div></article>`;
   },
   bindAdd(root, rows) {
-    root.querySelectorAll("[data-add]").forEach((b) => b.onclick = () => { const p = rows.find((x) => x.id === b.dataset.add); if (p) this.addToList({ id: p.id, name_en: p.name_en, name_ar: p.name_ar, unit: p.unit, qty: 1, opts: [], opts_text_en: "", opts_text_ar: "", icon: p.category_icon, img: this.photo(p) }); b.classList.add("ok"); setTimeout(() => b.classList.remove("ok"), 1500); });
+    root.querySelectorAll("[data-add]").forEach((b) => b.onclick = () => { const p = rows.find((x) => x.id === b.dataset.add); if (p) this.addToList({ id: p.id, name_en: p.name_en, name_ar: p.name_ar, unit: p.unit, qty: this.moq(p), moq: this.moq(p), opts: [], opts_text_en: "", opts_text_ar: "", icon: p.category_icon, img: this.photo(p) }); b.classList.add("ok"); setTimeout(() => b.classList.remove("ok"), 1500); });
   },
 };
 window.Site = Site;

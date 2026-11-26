@@ -623,3 +623,13 @@ a.guide-link { color: inherit; text-decoration: none; }
 .pg-dir{padding-block:20px 48px}.pg-dir .lead{margin:8px 0 18px;max-width:72ch;line-height:1.6}.pg-dir .dir-toc ul{columns:3 230px;column-gap:28px;list-style:none;padding:0;margin:26px 0 34px}.pg-dir .dir-toc li{break-inside:avoid}.pg-dir section{margin:30px 0;padding-top:18px;border-top:1px solid rgba(10,17,32,.12)}.pg-dir h2 a{color:inherit;text-decoration:none}.pg-dir h3{margin:20px 0 6px;font-size:1.05rem}.pg-dir h3 a{color:inherit}.pg-dir section .static-list{padding-inline-start:20px;margin:0}
 
 .ct-social b a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+/* minimum order quantities */
+.moq-badge { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; padding: 12px 14px; border-radius: 12px; background: rgba(245, 122, 16, .08); border: 1px solid rgba(245, 122, 16, .35); color: inherit; }
+.moq-badge > svg { flex: none; color: #F57A10; margin-top: 2px; }
+.moq-badge b { display: block; font-size: 15px; }
+.moq-badge small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+.moq-low { width: 100%; margin: 0; font-size: 13px; font-weight: 700; color: #C2410C; }
+.pc-moq { margin-top: auto; padding-top: 6px; font-size: 12.5px; font-weight: 700; color: #C2570C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pc-moq + .pc-foot { margin-top: 0; }
+.qi-moq { display: block; font-size: 11.5px; color: #C2570C; font-weight: 600; }

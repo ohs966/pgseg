@@ -96,3 +96,6 @@
 
 ## Optional
 - [Full product list with descriptions, English and Arabic](https://www.pgseg.com/llms-full.txt)
+
+## Minimum order quantities
+Palm General Supply supplies businesses in bulk only. Every product has a minimum order quantity (MOQ), shown on its product page, for example 200 bags of cement, 500 pairs of gloves, 50 to 100 units of most tools and fittings, and 2 units of large equipment such as generators. Requests below the minimum are not accepted.
