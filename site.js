@@ -105,7 +105,8 @@ const Site = {
   moqText(p) { const q = this.moq(p); return this.lang === "ar" ? "الحد الأدنى للطلب: " + this.num(q) + " " + this.unitN(p.unit, q) : "Minimum order: " + this.num(q) + " " + this.unitN(p.unit, q); },
   moqShort(p) { const q = this.moq(p); return this.lang === "ar" ? "أقل طلب " + this.num(q) + " " + this.unitN(p.unit, q) : "Min. " + this.num(q) + " " + this.unitN(p.unit, q); },
   /* MOQ_START: PGS supplies in bulk only. One rule for the whole site (also used by tools/build-products.mjs) */
-  moq: function(p) {
+  moq: (function () {
+    const base = function(p) {
     if (!p) return 1;
     const u = String(p.unit || "piece").toLowerCase(), n = String(p.name_en || "").toLowerCase(), t = n + " " + String(p.category_en || "").toLowerCase(), s = p.sector_code || "";
     const has = (re) => re.test(n), hasC = (re) => re.test(t);
@@ -128,7 +129,11 @@ const Site = {
     if (!tool && !has(/sheet|protector|jacket|tap\b|taps|toner|accessor|cover|pillow|towel|linen/) && has(/cordless|grinder|\bdrill\b|drill driver|impact|circular saw|jigsaw|breaker|vacuum|pressure washer|multimeter|clamp meter|tester|analyser|analyzer|camera|nvr|dvr|terminal|printer|scanner|laptop|computer|monitor|\btv\b|screen|router|access point|phone|radio|scale|balance|microwave|blender|\bmixer\b|oven|fryer|grill|kettle|toaster|dispenser|trolley|cart\b|ladder|scaffold|\bjacks?\b|hoist|winch|pallet truck|hand truck|\bsafe\b|\blockers?\b|cabinet|desk\b|table|chair|sofa|\bbeds?\b|mattress\b|wardrobe|whiteboard|motor|pump|actuator|\bfan\b|heater|air cooler|air conditioner|charger|inverter|controller|distribution board|panel|bollard|microscope|treadmill|dumbbell|kettlebell|weight plate|machine|shelving|racking|vibrator|compactor|meter\b|caliper|gauge/)) q = Math.min(q, s === "electrical" || s === "lighting" ? 20 : 10);
     if (u === "set") q = q <= 10 ? Math.max(2, Math.round(q / 2)) : Math.round(q / 2);
     return q;
-  },
+  };
+    // PGS works with large orders only: every minimum is 5x the base rule (services, hire and transport stay at 1)
+    const MULT = 5;
+    return function (p) { const q = base(p); return q <= 1 ? 1 : q * MULT; };
+  })(),
   /* MOQ_END */
   num(n) { return new Intl.NumberFormat(this.lang === "ar" ? "ar-EG" : "en-US").format(n); },
 
